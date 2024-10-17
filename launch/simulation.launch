@@ -4,14 +4,14 @@
 <arg name="map_size_y" default="50.0"/>
 <arg name="map_size_z" default=" 5.0"/>
 
-<arg name="init_x" default="-20.0"/>
-<arg name="init_y" default="-20.0"/>
-<arg name="init_z" default="  0.5"/>
+<arg name="init_x" default="4.0"/>
+<arg name="init_y" default="4.0"/>
+<arg name="init_z" default="  0.0"/>
 
   <node pkg="bezier_planer" type="b_traj_node" name="b_traj_node" output="screen">
       <remap from="~waypoints"      to="/waypoint_generator/waypoints"/>
       <remap from="~odometry"       to="/odom/fake_odom"/>
-      <remap from="~map"            to="/random_forest_sensing/random_forest"/> 
+      <remap from="~map"            to="/load_and_publish_map/all_map"/> 
       <remap from="~command"        to="/position_cmd"/> 
       <param name="optimization/poly_order"  value="8"/> 
       <param name="optimization/min_order"   value="2.5"/> 
@@ -91,5 +91,8 @@
   </node>
 
   <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find bezier_planer)/launch/rviz_config/simulation.rviz" />
+
+  <node name="velocity_map" pkg="bezier_planer" type="velocity_map" output="screen">
+    </node>
 
 </launch>
