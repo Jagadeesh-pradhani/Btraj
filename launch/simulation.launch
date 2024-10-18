@@ -10,7 +10,7 @@
 
   <node pkg="bezier_planer" type="b_traj_node" name="b_traj_node" output="screen">
       <remap from="~waypoints"      to="/waypoint_generator/waypoints"/>
-      <remap from="~odometry"       to="/odom/fake_odom"/>
+      <remap from="~odometry"       to="odom"/>
       <remap from="~map"            to="/load_and_publish_map/all_map"/> 
       <remap from="~command"        to="/position_cmd"/> 
       <param name="optimization/poly_order"  value="8"/> 
@@ -41,30 +41,30 @@
       <param name="vis/is_proj_cube"   value="false"/>
   </node>
   
-  <node pkg  = "bezier_planer" type = "odom_generator" output = "screen" name = "odom_generator">    
-      <remap from = "~odometry"  to = "odom/fake_odom"/>
+  <!-- <node pkg  = "bezier_planer" type = "odom_generator" output = "screen" name = "odom_generator">    
+      <remap from = "~odometry"  to = "odom"/>
       <remap from = "~command"   to = "/position_cmd"/>
       <param name="init_x"  value="$(arg init_x)"/>
       <param name="init_y"  value="$(arg init_y)"/>
       <param name="init_z"  value="$(arg init_z)"/>
-  </node>
+  </node> -->
 
   <node pkg  = "bezier_planer" type = "b_traj_server" output = "screen" name = "b_traj_server">    
       <remap from = "~trajectory"        to = "b_traj_node/trajectory"/>
-      <remap from = "~odometry"          to = "/odom/fake_odom"/>
+      <remap from = "~odometry"          to = "odom"/>
       <remap from = "~position_command"  to = "/position_cmd"/>
       <param name="optimization/poly_order_min" value="3" /> 
       <param name="optimization/poly_order_max" value="12"/> 
   </node>
 
   <node pkg="waypoint_generator" name="waypoint_generator" type="waypoint_generator" output="screen">
-      <remap from="~odom" to="/odom/fake_odom"/>        
+      <remap from="~odom" to="odom"/>        
       <remap from="~goal" to="/goal"/>
       <param name="waypoint_type" value="manual-lonely-waypoint"/>    
   </node>
 
   <node pkg ="bezier_planer" name ="random_forest_sensing" type ="random_forest_sensing" output = "screen">    
-      <remap from="~odometry"   to="/odom/fake_odom"/>    
+      <remap from="~odometry"   to="odom"/>    
       <param name="init_state_x"   value="$(arg init_x)"/>
       <param name="init_state_y"   value="$(arg init_y)"/>
       <param name="map/x_size"     value="$(arg map_size_x)" />
@@ -81,7 +81,7 @@
   </node>
 
   <node pkg="odom_visualization" name="odom_visualization_ukf_" type="odom_visualization" output="screen">
-      <remap from="~odom" to="/odom/fake_odom"/>
+      <remap from="~odom" to="odom"/>
       <param name="color/a" value="0.8"/>    
       <param name="color/r" value="0.0"/>        
       <param name="color/g" value="0.0"/>        
