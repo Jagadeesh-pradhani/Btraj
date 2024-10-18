@@ -118,7 +118,7 @@ quadrotor_msgs::PolynomialTrajectory getBezierTraj();
 
 void rcvOdometryCallbck(const nav_msgs::Odometry odom)
 {
-    if (odom.header.frame_id != "uav") 
+    if (odom.header.frame_id != "odom") 
         return ;
     
     _odom = odom;
