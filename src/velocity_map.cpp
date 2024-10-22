@@ -45,7 +45,7 @@ int main(int argc, char** argv)
     cmd_vel_pub = nh.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
 
     // Subscribe to the /position_cmd topic (quadrotor_msgs/PositionCommand)
-    ros::Subscriber cmd_sub = nh.subscribe("/position_cmd", 10, positionCmdCallback);
+    ros::Subscriber cmd_sub = nh.subscribe("/planning/pos_cmd", 10, positionCmdCallback);
 
     // Subscribe to the /sonar_height topic to get height information
     ros::Subscriber sonar_sub = nh.subscribe("/sonar_height", 10, sonarHeightCallback);
